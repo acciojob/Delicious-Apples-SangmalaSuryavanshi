@@ -1,14 +1,12 @@
 describe('Apple Product Photo Album', () => {
     it('should display images in the photo album', () => {
+        cy.intercept('GET', '/your-api-endpoint').as('getPhotoAlbum'); // Adjust to your API
         cy.visit('/your-page'); // Replace with your actual page
+        cy.wait('@getPhotoAlbum'); // Wait for the network call
 
-        // Wait for the images to load if they come from an API
-        cy.intercept('GET', '/your-api-endpoint').as('getPhotoAlbum'); // Adjust the endpoint
-        cy.wait('@getPhotoAlbum');
-
-        // Assert that images exist in the photo album and are visible
-        cy.get('.photo-album img').should('exist'); 
-        cy.get('.photo-album img').should('be.visible'); 
-        cy.get('.photo-album img').should('have.length.greaterThan', 0); // Ensure there are images
+        // Assert that images exist and are visible
+        cy.get('.photo-album li img').should('exist'); // Adjust selector as necessary
+        cy.get('.photo-album li img').should('be.visible'); 
+        cy.get('.photo-album li img').should('have.length.greaterThan', 0); // Ensure there are images
     });
 });
