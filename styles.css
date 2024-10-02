@@ -91,7 +91,7 @@ body {
 }
 
 .add-to-cart button {
-    background-color: #4CAF50;
+    background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
