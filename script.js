@@ -1,12 +1,14 @@
-//your code here
-cy.get('.photo-main .photo-main-img');
-cy.get('.photo-album li img');
-cy.get('.price h2');
-cy.get('.variant li img');
+describe('Apple Product Photo Album', () => {
+    it('should display images in the photo album', () => {
+        cy.visit('/your-page'); // Replace with your actual page
 
-cy.get('body').then((body) => {
-  if (body.find('.photo-album>ul>li>img').length > 0) {  
-    cy.get('.photo-album>ul>li>img');
-  }
+        // Wait for the images to load if they come from an API
+        cy.intercept('GET', '/your-api-endpoint').as('getPhotoAlbum'); // Adjust the endpoint
+        cy.wait('@getPhotoAlbum');
+
+        // Assert that images exist in the photo album and are visible
+        cy.get('.photo-album img').should('exist'); 
+        cy.get('.photo-album img').should('be.visible'); 
+        cy.get('.photo-album img').should('have.length.greaterThan', 0); // Ensure there are images
+    });
 });
-cy.get('.photo-album>ul>li>img', { timeout: 10000 });
